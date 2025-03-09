@@ -44,6 +44,24 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- MyBatisPlus 驱动依赖-->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<version>3.4.2</version>
+		</dependency>
+		<!--mysql 依赖-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.28</version>
+		</dependency>
+		<!--数据库连接池 druid-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>1.1.20</version>
+		</dependency>
 
 
 	</dependencies>

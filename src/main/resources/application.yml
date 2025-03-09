@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: ServerUniApp
+
+server:
+  port: 8001
