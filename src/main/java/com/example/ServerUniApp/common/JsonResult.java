@@ -16,7 +16,6 @@ public class JsonResult<T> {
     private Integer code;
     private String msg;
     private T data;
-
     /*
        Success code默认为0
        分为：
@@ -51,7 +50,6 @@ public class JsonResult<T> {
         res.setData(object);
         return res;
     }
-
     /*
        Error code默认为1
        (异常没必要传数据)
