@@ -15,7 +15,5 @@ public interface StudentMapper {
     @Select("SELECT * FROM students WHERE auth_id = #{authId}")
     Student selectByAuthId(Integer authId);
 
-    @Update("UPDATE auth SET openid = #{openid} WHERE id = #{id}")
-    void updateOpenid(@Param("id") Integer id, @Param("openid") String openid);
 
 }

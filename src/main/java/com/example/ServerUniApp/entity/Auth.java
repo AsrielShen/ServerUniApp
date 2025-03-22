@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 public class Auth {
-    private Integer id;         // 用户ID
+    private Integer id;         // 认证ID
     private String userNumber;  // 用户学号/工号
     private String password;    // 密码
     private String openid;      // 微信OpenID

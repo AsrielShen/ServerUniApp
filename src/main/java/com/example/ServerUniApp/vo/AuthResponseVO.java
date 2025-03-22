@@ -11,4 +11,6 @@ public class AuthResponseVO {
     private String userName;
     private String role;
     private String token; // 最重要的认证信息
+    private Integer code; //0 成功 1 失败
+    private String msg; //成功失败等信息
 }

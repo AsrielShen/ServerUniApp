@@ -19,7 +19,7 @@ public class JwtUtil {
     private long expirationTime;
 
     // 生成 Token
-    public String createToken(Integer userId, String role) {
+    public String getToken(Integer userId, String role) {
         return JWT.create()
                 .withSubject(String.valueOf(userId)) // 存储 userId
                 .withClaim("role", role)  // 身份

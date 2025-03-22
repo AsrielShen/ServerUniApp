@@ -5,10 +5,11 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class RegisterRequestVO {
+public class RegisterStudentVO {
     // 主要用于学生注册，小程序前端不提供老师的注册方法
     private String studentNumber;  // 学号
     private String studentName;    // 姓名
+    private String password;       //密码
     private String gender;         // 性别
     private String department;     // 学院
     private String major;          // 专业

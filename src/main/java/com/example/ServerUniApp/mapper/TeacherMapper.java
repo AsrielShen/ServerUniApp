@@ -14,6 +14,6 @@ public interface TeacherMapper {
 
     // 根据认证ID查询老师
     @Select("SELECT * FROM teachers WHERE auth_id = #{authId}")
-    Teacher selectTeacherByAuthId(Integer authId);
+    Teacher selectByAuthId(Integer authId);
 
 }

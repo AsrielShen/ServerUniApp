@@ -10,19 +10,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/random-call")
 public class RandomCallController {
-//    @GetMapping("/random-student")
-//    public JsonResult<Student> getRandomStudent() {
-//
-//        return JsonResult.success(new Student());
-//    }
-//
-//    @GetMapping("/all-student")
-//    public JsonResult<Student> getAllStudent() {
-//
-//        return JsonResult.success(new Student());
-//    }
-
-
-
 
 }

@@ -5,6 +5,7 @@ import com.example.ServerUniApp.common.JsonResult;
 import com.example.ServerUniApp.service.AuthService;
 import com.example.ServerUniApp.vo.AuthResponseVO;
 import com.example.ServerUniApp.vo.LoginRequestVO;
+import com.example.ServerUniApp.vo.RegisterStudentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,26 +19,30 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    private JsonResult<AuthResponseVO> returnFunc(AuthResponseVO response) {
+        if(response.getCode() == 0)
+            return JsonResult.success(response, response.getMsg());
+        else
+            return JsonResult.error(1, response.getMsg());
+    }
+
     @PostMapping("/login")
     public JsonResult<AuthResponseVO> login(@RequestBody LoginRequestVO request) {
         AuthResponseVO response = authService.loginByPassword(request);
-        if(response != null)
-            return JsonResult.success(response, "登录成功");
-        else return JsonResult.error("账号或密码出错！");
+        return returnFunc(response);
     }
 
 
     @PostMapping("/wechat/login")
     public JsonResult<AuthResponseVO> wechatLogin(@RequestBody String openid) {
         AuthResponseVO response = authService.loginByOpenid(openid);
-        if(response != null)
-            return JsonResult.success(response, "登录成功");
-        else return JsonResult.error("账号或密码出错！");
+        return returnFunc(response);
     }
 
     @PostMapping("/register/student")
-    public JsonResult<AuthResponseVO> registerStudent(@RequestBody String openid) {
-        return JsonResult.success();
+    public JsonResult<AuthResponseVO> registerStudent(@RequestBody RegisterStudentVO request) {
+        AuthResponseVO response = authService.registerStudent(request);
+        return returnFunc(response);
     }
 
 }
