@@ -1,4 +1,4 @@
-package com.example.ServerUniApp.service;
-
-public interface RandomCallService {
-}
+//package com.example.ServerUniApp.service;
+//
+//public interface RandomCallService {
+//}

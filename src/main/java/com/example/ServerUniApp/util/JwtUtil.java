@@ -28,7 +28,7 @@ public class JwtUtil {
                 .sign(Algorithm.HMAC256(secretKey));  // 生成签名
     }
 
-    //认证信息
+    // 认证信息
     public Map<String, Object> getUserInfo(String token) {
         try {
             DecodedJWT jwt = JWT.require(Algorithm.HMAC256(secretKey))
@@ -49,7 +49,7 @@ public class JwtUtil {
         }
     }
 
-    //检查 Token 是否有效
+    // 检查 Token 是否有效
     public boolean isValid(String token) {
         return getUserInfo(token) != null;
     }

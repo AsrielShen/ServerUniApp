@@ -3,6 +3,7 @@ package com.example.ServerUniApp.mapper;
 import com.example.ServerUniApp.entity.Auth;
 import org.apache.ibatis.annotations.*;
 
+
 @Mapper
 public interface AuthMapper {
 

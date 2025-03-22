@@ -1,4 +1,4 @@
-package com.example.ServerUniApp.controller;
-
-public class AiController {
-}
+//package com.example.ServerUniApp.controller;
+//
+//public class AiController {
+//}
