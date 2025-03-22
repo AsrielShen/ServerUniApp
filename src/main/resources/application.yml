@@ -28,5 +28,11 @@ mybatis:
   mapper-locations: # mapper映射文件位置
     - classpath:mapper/*.xml
 
+#Token 私钥
+jwt:
+  secret: V8sq1R8Ck+TunIqrTiCby3MPeDJtObZH/jm38pT2XUc=
+  expiration: 86400000  #24 * 60 * 60 * 1000 毫秒
+
+
 
 

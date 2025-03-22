@@ -36,13 +36,13 @@ public class JsonResult<T> {
         res.setMsg(msg);
         return res;
     }
-    public static <E> JsonResult<E> success (E object) {
-        JsonResult<E> res = new JsonResult<>();
-        res.setCode(0);
-        res.setMsg("操作成功");
-        res.setData(object);
-        return res;
-    }
+//    public static <E> JsonResult<E> success (E object) {
+//        JsonResult<E> res = new JsonResult<>();
+//        res.setCode(0);
+//        res.setMsg("操作成功");
+//        res.setData(object);
+//        return res;
+//    }
     public static <E> JsonResult<E> success (E object, String msg) {
         JsonResult<E> res = new JsonResult<>();
         res.setCode(0);
