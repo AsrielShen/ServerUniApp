@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 public class CourseCreateVO {
     private String courseName;
-    private String token; //身份认证
+    private String token;   //身份认证
     private String description;
     private MultipartFile file;
 }
