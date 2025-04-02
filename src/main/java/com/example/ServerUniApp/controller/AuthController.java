@@ -7,6 +7,7 @@ import com.example.ServerUniApp.service.AuthService;
 import com.example.ServerUniApp.vo.AuthResponseVO;
 import com.example.ServerUniApp.vo.LoginRequestVO;
 import com.example.ServerUniApp.vo.RegisterStudentVO;
+import com.example.ServerUniApp.vo.RegisterTeacherVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +44,12 @@ public class AuthController {
     @PostMapping("/register/student")
     public JsonResult<AuthResponseVO> registerStudent(@RequestBody RegisterStudentVO request) {
         AuthResponseVO response = authService.registerStudent(request);
+        return returnFunc(response);
+    }
+
+    @PostMapping("/register/teacher")
+    public JsonResult<AuthResponseVO> registerTeacher(@RequestBody RegisterTeacherVO request) {
+        AuthResponseVO response = authService.registerTeacher(request);
         return returnFunc(response);
     }
 

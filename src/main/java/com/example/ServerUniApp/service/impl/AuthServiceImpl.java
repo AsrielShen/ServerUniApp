@@ -11,6 +11,7 @@ import com.example.ServerUniApp.util.JwtUtil;
 import com.example.ServerUniApp.vo.AuthResponseVO;
 import com.example.ServerUniApp.vo.LoginRequestVO;
 import com.example.ServerUniApp.vo.RegisterStudentVO;
+import com.example.ServerUniApp.vo.RegisterTeacherVO;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,9 +88,11 @@ public class AuthServiceImpl implements AuthService {
         String hashedPassword = BCrypt.hashpw(request.getPassword(), BCrypt.gensalt());
 
         // 添加 auth 和 student
+        // 创建 auth
         Auth auth = new Auth(null, request.getStudentNumber(), hashedPassword, request.getOpenid(), "student", null);
         authMapper.insertAuth(auth);
 
+        // 创建 student
         Integer authId = auth.getId();
         Student user = new Student(null, authId, request.getStudentNumber(), request.getStudentName(),
                 request.getGender(), request.getDepartment(), request.getMajor(), request.getGrade(),
@@ -100,4 +103,58 @@ public class AuthServiceImpl implements AuthService {
         String token = jwtUtil.getToken(user.getId(), user.getRole());
         return new AuthResponseVO(user.getId(), user.getStudentNumber(), user.getStudentName(), user.getRole(), token, 0, "注册成功！");
     }
+
+    @Override
+    @Transactional
+    public Integer registerStudentFromExcel(String studentNumber, String studentName){
+        // 检查当前学生是否注册过账号
+        Auth existingAuth = authMapper.findByUserNumber(studentNumber);
+        if(existingAuth != null) {
+            //已存在直接寻找学生id
+            return studentMapper.findByAuthId(existingAuth.getId()).getId();
+        }
+
+        // 若学生未注册账号，则默认创建auth和student
+        // 默认密码（使用默认密码帮同学创建账号）
+        String defaultPassword = BCrypt.hashpw("123456789", BCrypt.gensalt());
+
+        // 添加 auth 和 student
+        // 添加 auth
+        Auth auth = new Auth(null, studentNumber, defaultPassword, null, "student", null);
+        authMapper.insertAuth(auth);
+
+        // 添加 student
+        Integer authId = auth.getId();
+        Student student = new Student(null, authId, studentNumber, studentName, null, null, null, null, null, "student", null);
+        studentMapper.insertStudent(student);
+
+        return student.getId();
+    }
+
+    @Override
+    @Transactional
+    public AuthResponseVO registerTeacher(RegisterTeacherVO request) {
+        if (authMapper.findByUserNumber(request.getTeacherNumber()) != null) {
+            return new AuthResponseVO(null, request.getTeacherNumber(), null, null, null, 1, "该工号/学号已被注册！");
+        }
+
+        // 密码加密
+        String hashedPassword = BCrypt.hashpw(request.getPassword(), BCrypt.gensalt());
+
+        // 添加 auth 和 teacher
+        // 创建 auth
+        Auth auth = new Auth(null, request.getTeacherNumber(), hashedPassword, request.getOpenid(), "teacher", null);
+        authMapper.insertAuth(auth);
+
+        // 创建 teacher
+        Integer authId = auth.getId();
+        Teacher user = new Teacher(null, authId, request.getTeacherNumber(), request.getTeacherName(),
+                request.getGender(), request.getDepartment(), request.getPhone(), "teacher", null);
+        teacherMapper.insertTeacher(user);
+
+        // 生成 Token，并返回
+        String token = jwtUtil.getToken(user.getId(), user.getRole());
+        return new AuthResponseVO(user.getId(), user.getTeacherNumber(), user.getTeacherName(), user.getRole(), token, 0, "注册成功！");
+    }
+
 }
