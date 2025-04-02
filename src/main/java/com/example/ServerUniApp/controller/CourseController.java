@@ -17,7 +17,7 @@ public class CourseController {
     private CourseService courseService;
 
     @PostMapping("/create")
-    public JsonResult<?> createCourse(@RequestBody CourseCreateVO request) {
+    public JsonResult<?> createCourse(CourseCreateVO request) {
         return courseService.createCourse(request);
     }
 //
