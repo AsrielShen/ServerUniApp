@@ -22,13 +22,17 @@ public class TestController {
     @Autowired
     private CourseMapper courseMapper;
 
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello world!";
+    }
+
     @PostMapping("/course/create")
     public Course courseCreate(@RequestBody Course request) {
         Course ans = new Course(null, request.getCourseName(), request.getTeacherId(), request.getDescription(), null);
         courseMapper.insertCourse(ans);
         return ans;
     }
-
 
     @GetMapping("/auth/studentNumber/studentName/{studentNumber}/{studentName}")
     public Integer registerStudentByExcel(@PathVariable String studentNumber,@PathVariable String studentName) {
