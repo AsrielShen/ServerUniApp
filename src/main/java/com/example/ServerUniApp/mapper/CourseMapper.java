@@ -13,6 +13,9 @@ public interface CourseMapper {
     @Select("SELECT * FROM courses WHERE teacher_id = #{teacherId}")
     Course findByTeacherId(Integer teacherId);
 
+    @Select("SELECT * FROM courses WHERE id = #{id}")
+    Course findById(Integer id);
+
     @Insert("INSERT INTO courses (course_name, teacher_id, description) VALUES (#{courseName}, #{teacherId}, #{description})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertCourse(Course course);
