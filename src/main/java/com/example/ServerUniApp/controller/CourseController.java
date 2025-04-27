@@ -51,5 +51,4 @@ public class CourseController {
         courseStudentMapper.insertStudentToCourse(courseId,userId);
         return JsonResult.success();
     }
-
 }

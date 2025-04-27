@@ -34,7 +34,6 @@ public class AuthController {
         return returnFunc(response);
     }
 
-
     @GetMapping("/wechat/login/{openid}")
     public JsonResult<AuthResponseVO> wechatLogin(String openid) {
         AuthResponseVO response = authService.loginByOpenid(openid);
