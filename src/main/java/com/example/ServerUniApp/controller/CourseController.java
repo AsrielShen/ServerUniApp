@@ -10,6 +10,7 @@ import com.example.ServerUniApp.vo.CourseCreateVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -50,5 +51,16 @@ public class CourseController {
         Integer userId = (Integer) userInfo.get("userId");
         courseStudentMapper.insertStudentToCourse(courseId,userId);
         return JsonResult.success();
+    }
+
+    @GetMapping("/allCourse/teacher/{token}")
+    public JsonResult<?> getAllCourseByTeacherId(@PathVariable String token) {
+        Map<String, Object> userInfo = jwtUtil.getUserInfo(token);
+        if (userInfo == null || !"teacher".equals(userInfo.get("role"))) {
+            return JsonResult.error(2, "身份认证错误，请重新登录！");
+        }
+        Integer userId = (Integer) userInfo.get("userId");
+        List<Course> courses = courseMapper.findAllCourseByTeacherId(userId);
+        return JsonResult.success(courses,"操作成功");
     }
 }

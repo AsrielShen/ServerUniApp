@@ -6,6 +6,9 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface StudentMapper {
 
+    @Select("SELECT id FROM students WHERE student_number = #{studentNumber}")
+    Integer findStudentIdByNumber(@Param("studentNumber") String studentNumber);
+
     // 通过 authId 查询学生信息
     @Select("SELECT * FROM students WHERE auth_id = #{authId}")
     Student findByAuthId(Integer authId);
